@@ -24,9 +24,9 @@ steps:
 #adapt run k8s-test --deployID omar-app-dev
 
 
-### Install adapt
-  - id: 'install'
-    name: @adpt/cli
+### Run Adapt
+  - id: 'deploy'
+    name: '@adpt/cli'
     entrypoint: 'adapt'
     args: ['run','k8s-test','--deployID','omar-app-dev']
 
