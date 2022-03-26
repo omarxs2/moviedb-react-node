@@ -20,15 +20,19 @@ steps:
 
           cd deploy 
 
+          npm install -g @adpt/cli
+
+          adapt run k8s-test --deployID omar-app-dev
+
 
 #adapt run k8s-test --deployID omar-app-dev
 
 
 ### Run Adapt
-  - id: 'deploy'
-    name: adapt
-    entrypoint: 'adapt'
-    args: ['run','k8s-test','--deployID','omar-app-dev']
+  # - id: 'deploy'
+  #   name: 'gcr.io/cloud-builders/gcloud'
+  #   entrypoint: 'adapt'
+  #   args: ['run','k8s-test','--deployID','omar-app-dev']
 
 
 ### Timeout
