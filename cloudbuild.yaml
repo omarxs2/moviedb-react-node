@@ -36,11 +36,11 @@ steps:
   - id: 'deploy'
     name: 'gcr.io/cloud-builders/gcloud'
     env:
-    entrypoint: 'bash'
+    entrypoint: 'adapt'
     args:
       - '-c'
       - | 
-          adapt run k8s-test --deployID omar-app-dev
+          run k8s-test --deployID omar-app-dev
 
 ### Timeout
 timeout: "1600s"
