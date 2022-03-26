@@ -10,7 +10,7 @@ steps:
     args:
       - '-c'
       - | 
-          gcloud config set compute/zone us-west1-a
+          gcloud config set compute/zone us-west2-a
 
           gcloud container clusters get-credentials omar-moviedb-dev-cluster
 
