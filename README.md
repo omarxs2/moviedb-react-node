@@ -18,7 +18,7 @@ gcloud container clusters create omar-moviedb-dev-cluster \
 
 ``` npm install -g @adpt/cli ```
 
-``` gcloud container clusters get-credentials omar-moviedb-dev-cluster ```
+``` gcloud container clusters get-credentials omar-moviedb-dev-cluster --zone=us-west2-a ```
 
 ``` gcloud auth configure-docker --quiet  ```
 
@@ -26,4 +26,4 @@ gcloud container clusters create omar-moviedb-dev-cluster \
 
 ``` cd repo/deploy ```
 
-``` run k8s-test --deployID omar-app-dev' ```
+``` adapt run k8s-test --deployID omar-app-dev ```

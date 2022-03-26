@@ -2,23 +2,6 @@
 
 steps:
 
-### Install adapt
-  - id: 'install'
-    name: node
-    entrypoint: 'npm'
-    args: ['adapt','--version','||','install', '-g','@adpt/cli']
-
-# ### Create cluster
-#   - id: 'cluster'
-#     name: 'gcr.io/cloud-builders/gcloud'
-#     env:
-#     args:
-#       -  gcloud container clusters get-credentials omar-moviedb-dev-cluster --zone=us-west2-a || gcloud container clusters create omar-moviedb-dev-cluster \
-#               --project=devops-343007 \
-#               --zone=us-west1-a \
-#               --num-nodes=1 \
-#               --network=omar-vpc
-
 ### Deployment by adapt
   - id: 'pre-deploy'
     name: 'gcr.io/cloud-builders/gcloud'
@@ -27,26 +10,15 @@ steps:
     args:
       - '-c'
       - | 
-
           gcloud config set compute/zone us-west1-a
-          gcloud container clusters get-credentials omar-moviedb-dev-cluster 
 
-          gcloud auth configure-docker --quiet 
+          gcloud container clusters get-credentials omar-moviedb-dev-cluster
 
-          export KUBECONFIG=gcr.io/devops-343007 
+          gcloud auth configure-docker --quiet
 
           export KUBE_DOCKER_REPO=gcr.io/devops-343007 
 
-# ### run adapt
-#   - id: 'direct'
-#     name: 'ubuntu'
-#     args: ['cd', 'deploy']
-
-# ### run adapt
-#   - id: 'deploy'
-#     name: 'gcr.io/cloud-builders/gcloud'
-#     entrypoint: 'adapt'
-#     args: ['run', 'k8s-test','--deployID','adapt-app-dev']
+          adapt run k8s-test --deployID omar-app-dev
 
 ### Timeout
 timeout: "1600s"
