@@ -37,10 +37,8 @@ steps:
     name: 'gcr.io/cloud-builders/gcloud'
     env:
     entrypoint: 'adapt'
-    args:
-      - '-c'
-      - | 
-          run k8s-test --deployID omar-app-dev
+    args: ['run','k8s-test','--deployID','omar-app-dev']
+             
 
 ### Timeout
 timeout: "1600s"
