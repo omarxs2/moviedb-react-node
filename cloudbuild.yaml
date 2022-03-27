@@ -25,6 +25,9 @@ steps:
   - id: 'deploy'
     name: 'gcr.io/devops-343007/omar-adapt'
     entrypoint: 'adapt' 
+    env: 
+    - 'KUBECONFIG=gcr.io/devops-343007 '
+    - 'KUBE_DOCKER_REPO=gcr.io/devops-343007'
     args: ['run','k8s-test','--deployID','omar-app-dev-2']
     # args: ['update','omar-app-dev']
     dir: 'deploy'
