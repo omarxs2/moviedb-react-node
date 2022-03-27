@@ -24,7 +24,7 @@ steps:
 # Run Adapt
   - id: 'deploy'
     name: 'gcr.io/devops-343007/omar-adapt'
-    entrypoint: 'adapt'
+    entrypoint: 'adapt' 
     # args: ['run','k8s-test','--deployID','omar-app-dev']
     args: ['update','omar-app-dev']
     dir: 'deploy'
