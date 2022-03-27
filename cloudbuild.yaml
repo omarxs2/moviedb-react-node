@@ -26,16 +26,15 @@ steps:
 #adapt run k8s-test --deployID omar-app-dev
 
 
-### Run Adapt
-  - id: 'install'
-    name: node
-    entrypoint: 'npm'
-    args: ['install','-g','@adpt/cli']
+# ### Run Adapt
+#   - id: 'install'
+#     name: node
+#     entrypoint: 'npm'
+#     args: ['install','-g','@adpt/cli']
 
 
   - id: 'deploy'
-    name: 'gcr.io/cloud-builders/gcloud'
-    env:
+    name: 'gcr.io/devops-343007/omar-adapt'
     entrypoint: 'adapt'
     args: ['run','k8s-test','--deployID','omar-app-dev']
              
