@@ -18,7 +18,6 @@ steps:
 
           export KUBE_DOCKER_REPO=gcr.io/devops-343007 
 
-          cd deploy 
 
 
 #npm install -g @adpt/cli
@@ -36,7 +35,7 @@ steps:
   - id: 'deploy'
     name: 'gcr.io/devops-343007/omar-adapt'
     entrypoint: 'adapt'
-    args: ['run','k8s-test','--deployID','omar-app-dev']
+    args: ['cd','deploy','/','run','k8s-test','--deployID','omar-app-dev']
              
 
 ### Timeout
