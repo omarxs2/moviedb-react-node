@@ -20,22 +20,23 @@ steps:
 
 
 
-#npm install -g @adpt/cli
-
 #adapt run k8s-test --deployID omar-app-dev
-
-
-# ### Run Adapt
-#   - id: 'install'
-#     name: node
-#     entrypoint: 'npm'
-#     args: ['install','-g','@adpt/cli']
-
 
   - id: 'deploy'
     name: 'gcr.io/devops-343007/omar-adapt'
-    entrypoint: 'adapt'
-    args: ['cd','deploy','/','run','k8s-test','--deployID','omar-app-dev']
+    env:
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - | 
+          cd deploy
+          adapt k8s-test --deployID omar-app-dev
+
+
+  # - id: 'deploy'
+  #   name: 'gcr.io/devops-343007/omar-adapt'
+  #   entrypoint: 'adapt'
+  #   args: ['cd','deploy','/','run','k8s-test','--deployID','omar-app-dev']
              
 
 ### Timeout
