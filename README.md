@@ -4,18 +4,19 @@
 
 1- Create VPC and Dev Cluster 
 
+* Using terraform:
+
+``` terrafom apply ```
+
 * Using gcloud:
 ```
 gcloud container clusters create omar-moviedb-dev-cluster \
-    --project=devops-343007 \
+    --project=omar-devops \
     --zone=us-west2-a \
-    --network=omar-vpc \
+    --network=dev-vpc \
     --enable-ip-alias \
 	--num-nodes=1
 ```
-
-* Using terraform:
-``` terrafom apply ```
 
 2- Connect to source repos
 
@@ -30,5 +31,7 @@ gcloud container clusters create omar-moviedb-dev-cluster \
 ``` cd ./deploy ```
 
 ``` adapt run k8s-test --deployID omar-app-dev ```
+
+``` adapt update```
 
 these steps will automaticly be ruuned at every time we push our code to main branch

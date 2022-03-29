@@ -45,3 +45,42 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
     ]
   }
 }
+
+
+# Native Cluster Example
+
+# resource "google_compute_network" "dev-vpc" {
+#   name                    = "dev-vpc"
+#   auto_create_subnetworks = false
+# }
+
+# resource "google_compute_subnetwork" "dev-subnet" {
+#   name          = "dev-subnet"
+#   ip_cidr_range = "10.2.0.0/16"
+#   region        = "us-central1"
+#   network       = google_compute_network.dev-vpc.id
+#   secondary_ip_range {
+#     range_name    = "services-range"
+#     ip_cidr_range = "192.168.1.0/24"
+#   }
+
+#   secondary_ip_range {
+#     range_name    = "pod-ranges"
+#     ip_cidr_range = "192.168.64.0/22"
+#   }
+# }
+
+
+# resource "google_container_cluster" "dev-cluster" {
+#   name               = "dev-cluster"
+#   location           = "us-central1"
+#   initial_node_count = 1
+
+#   network    = google_compute_network.dev-vpc.id
+#   subnetwork = google_compute_subnetwork.dev-subnet.id
+
+#   ip_allocation_policy {
+#     cluster_secondary_range_name  = "services-range"
+#     services_secondary_range_name = google_compute_subnetwork.dev-subnet.secondary_ip_range.1.range_name
+#   }
+# }
