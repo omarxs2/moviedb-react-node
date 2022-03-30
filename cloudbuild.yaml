@@ -2,22 +2,6 @@
 
 steps:
 
-### Deployment by adapt
-  # - id: 'pre-deploy'
-  #   name: 'gcr.io/cloud-builders/gcloud'
-  #   env:
-  #   entrypoint: 'bash'
-  #   args:
-  #     - '-c'
-  #     - | 
-  #         gcloud config set compute/zone us-west2-a
-
-  #         gcloud container clusters get-credentials omar-moviedb-dev-cluster
-
-  #         gcloud auth configure-docker --quiet
-
-  #         export KUBE_DOCKER_REPO=gcr.io/devops-343007 
-
 
 #adapt run k8s-test --deployID omar-app-dev
 
@@ -26,9 +10,7 @@ steps:
     name: 'gcr.io/omar-devops/adapt'
     entrypoint: 'adapt' 
     env: 
-    - 'KUBECONFIG=gcr.io/omar-devops'
     - 'KUBE_DOCKER_REPO=gcr.io/omar-devops'
-    # args: ['run','k8s-test','--deployID','omar-app-dev-2']
     args: ['update','omar-app-dev']
     dir: 'deploy'
              
