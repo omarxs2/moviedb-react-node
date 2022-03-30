@@ -15,7 +15,7 @@ resource "google_compute_network" "vpc" {
 
 resource "google_container_cluster" "primary" {
   name     = "development-cluster"
-  location = "us-central1-a"
+  location = "us-west1-a"
   network = google_compute_network.vpc.id
 
   # We can't create a cluster with no node pool defined, but we want to only use
@@ -28,9 +28,9 @@ resource "google_container_cluster" "primary" {
 
 # Creating Main Node 
 
-resource "google_container_node_pool" "primary_preemptible_nodes" {
-  name       = "my-node-pool"
-  location   = "us-central1-a"
+resource "google_container_node_pool" "primary_dev_nodes" {
+  name       = "dev-pool"
+  location   = "us-west1-a"
   cluster    = google_container_cluster.primary.name
   node_count = 1
 
@@ -46,41 +46,28 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
   }
 }
 
+# Autopilot Cluster
 
-# Native Cluster Example
+resource "google_compute_network" "vpc2" {
+    name = "prod-vpc"
+    auto_create_subnetworks = false
+}
 
-# resource "google_compute_network" "dev-vpc" {
-#   name                    = "dev-vpc"
-#   auto_create_subnetworks = false
+
+# Subnet 
+resource "google_compute_subnetwork" "prod-subnet" {
+name = "prod-subnet"
+ip_cidr_range = "172.16.0.0/24"
+region = "us-west1"
+network = google_compute_network.vpc2.id
+}
+
+
+# resource "google_container_cluster" "autopilot" {
+#   name     = "development-cluster"
+#   location = "us-west1"
+#   network = google_compute_network.vpc2.id
+#   subnetwork = google_compute_subnetwork.prod-subnet.name
+#   enable_autopilot = true
 # }
 
-# resource "google_compute_subnetwork" "dev-subnet" {
-#   name          = "dev-subnet"
-#   ip_cidr_range = "10.2.0.0/16"
-#   region        = "us-central1"
-#   network       = google_compute_network.dev-vpc.id
-#   secondary_ip_range {
-#     range_name    = "services-range"
-#     ip_cidr_range = "192.168.1.0/24"
-#   }
-
-#   secondary_ip_range {
-#     range_name    = "pod-ranges"
-#     ip_cidr_range = "192.168.64.0/22"
-#   }
-# }
-
-
-# resource "google_container_cluster" "dev-cluster" {
-#   name               = "dev-cluster"
-#   location           = "us-central1"
-#   initial_node_count = 1
-
-#   network    = google_compute_network.dev-vpc.id
-#   subnetwork = google_compute_subnetwork.dev-subnet.id
-
-#   ip_allocation_policy {
-#     cluster_secondary_range_name  = "services-range"
-#     services_secondary_range_name = google_compute_subnetwork.dev-subnet.secondary_ip_range.1.range_name
-#   }
-# }

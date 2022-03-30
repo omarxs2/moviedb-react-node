@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <div className="fluid-container App text-center">
         <img src="https://unbounded.systems/wp-content/uploads/revslider/cloudvideo/Unbounded-U-Logo-120px.png" className="App-logo" alt="logo" />
-        <p className="Title">Unbounded Develop Database</p>
+        <p className="Title">Unbounded Development Database</p>
 
         <MovieSearch />
       </div>
