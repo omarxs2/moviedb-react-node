@@ -7,12 +7,12 @@ steps:
 
 # Run Adapt
   - id: 'deploy'
-    name: 'gcr.io/omar-devops/adapt'
+    name: 'gcr.io/omar-devops/adapt-0.3.1'
     entrypoint: 'adapt' 
     env: 
     - 'KUBE_DOCKER_REPO=gcr.io/omar-devops/moviedb-dev'
-    args: ['run', 'k8s-test', '--deployID','moviedb-app-dev']
-    # args: ['update','omar-app-dev']
+    # args: ['run', 'k8s-test', '--deployID','moviedb-app-dev']
+    args: ['update','omar-app-dev']
     dir: 'deploy'
              
 

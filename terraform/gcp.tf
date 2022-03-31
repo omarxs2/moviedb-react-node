@@ -7,9 +7,16 @@ provider "google" {
 
 resource "google_compute_network" "vpc" {
     name = "main-vpc"
-    auto_create_subnetworks = true
+    auto_create_subnetworks = false
 }
 
+# Subnet 
+resource "google_compute_subnetwork" "dev-subnet" {
+name = "dev-subnet"
+ip_cidr_range = "172.16.0.0/24"
+region = "us-west1"
+network = google_compute_network.vpc2.id
+}
 
 # Creating Main Cluster 
 
@@ -58,16 +65,16 @@ resource "google_compute_network" "vpc2" {
 resource "google_compute_subnetwork" "prod-subnet" {
 name = "prod-subnet"
 ip_cidr_range = "172.16.0.0/24"
-region = "us-west1"
+region = "us-west2"
 network = google_compute_network.vpc2.id
 }
 
 
-# resource "google_container_cluster" "autopilot" {
-#   name     = "development-cluster"
-#   location = "us-west1"
-#   network = google_compute_network.vpc2.id
-#   subnetwork = google_compute_subnetwork.prod-subnet.name
-#   enable_autopilot = true
-# }
+resource "google_container_cluster" "autopilot" {
+  name     = "production-cluster"
+  location = "us-west2"
+  network = google_compute_network.vpc2.id
+  subnetwork = google_compute_subnetwork.prod-subnet.name
+  enable_autopilot = true
+}
 
